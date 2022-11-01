@@ -1,10 +1,10 @@
 const db = require('./database');
-const Req = require('./req');
+const Item = require('./item');
 
 // Associations:
 
 // Exports:
 module.exports = {
   db,
-  Req,
+  Item,
 };

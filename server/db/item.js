@@ -21,6 +21,9 @@ module.exports = db.define('item', {
       notEmpty: true,
     },
   },
+  link: {
+    type: DataTypes.TEXT,
+  },
   description: {
     type: DataTypes.TEXT,
   },

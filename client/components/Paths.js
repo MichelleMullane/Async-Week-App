@@ -1,8 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './Home';
-import NavBar from './NavBar';
-import Pear from './Pear';
+import { Home, Pear, NavBar } from './views';
 
 const Paths = () => {
   return (
