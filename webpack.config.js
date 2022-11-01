@@ -1,5 +1,3 @@
-const { resolve } = require('path');
-
 module.exports = {
   entry: ['./client/index.js'],
   output: {
@@ -7,11 +5,7 @@ module.exports = {
     filename: './public/bundle.js',
   },
   mode: 'development',
-  context: __dirname,
   devtool: 'source-map',
-  resolve: {
-    extensions: ['.js', '.jsx'],
-  },
   module: {
     rules: [
       {
