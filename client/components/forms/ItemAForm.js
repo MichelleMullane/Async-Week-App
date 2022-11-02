@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { createItem } from '../../redux';
 
 class ItemAForm extends React.Component {
   constructor(props) {
@@ -6,8 +8,6 @@ class ItemAForm extends React.Component {
     this.state = {
       brand: '',
       price: 0,
-      description: '',
-      url: '',
       size: '',
     };
 
@@ -16,21 +16,26 @@ class ItemAForm extends React.Component {
   }
 
   handleChange(event) {
+    console.log('handleChange state', this.state);
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
   handleSubmit(event) {
+    console.log('handleSubmit');
     event.preventDefault();
+
+    this.props.addItem({
+      brand: this.state.brand,
+      price: this.state.price,
+      size: this.state.size,
+    });
 
     this.setState({
       brand: '',
       price: 0,
-      description: '',
-      imageUrl: '',
       size: '',
-      link: '',
     });
   }
 
@@ -60,10 +65,18 @@ class ItemAForm extends React.Component {
           />
         </form>
 
-        <button type="submit">Submit Item A Details</button>
+        <button type="submit" onClick={this.handleSubmit}>
+          Submit Item A Details
+        </button>
       </div>
     );
   }
 }
 
-export default ItemAForm;
+const mapDispatch = (dispatch) => {
+  return {
+    addItem: (item) => dispatch(createItem(item)),
+  };
+};
+
+export default connect(null, mapDispatch)(ItemAForm);

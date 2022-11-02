@@ -14,6 +14,7 @@ router.get('/', async (req, res, next) => {
 // POST /api/items
 router.post('/', async (req, res, next) => {
   try {
+    console.log('add item post route', req.body);
     res.status(201).send(await Item.create(req.body));
   } catch (error) {
     next(error);
