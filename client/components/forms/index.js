@@ -1,4 +1,3 @@
-import ItemAForm from './ItemAForm';
-import ItemBForm from './ItemBForm';
+import NewItemForm from './NewItemForm';
 
-export { ItemAForm, ItemBForm };
+export { NewItemForm };

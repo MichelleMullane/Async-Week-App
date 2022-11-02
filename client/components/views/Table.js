@@ -1,22 +1,48 @@
 import React from 'react';
+import { Bar } from 'react-chartjs-2';
 import { getItems } from '../../redux';
 import { connect } from 'react-redux';
 
 class Table extends React.Component {
+  constructor() {
+    super();
+    this.data = {};
+  }
+
   componentDidMount() {
     this.props.getItems();
   }
 
   render() {
     const items = this.props.items;
-    console.log('render items', items);
+    let data = {};
+
+    if (items.length > 0) {
+      const labels = ['Price ($)'];
+      const datasets = items.map((item) => {
+        let color = Math.floor(Math.random() * (255 - 0) + 0);
+        return {
+          label: `${item.brand}`,
+          backgroundColor: `rgb(${color}, ${color}, ${color})`,
+          borderColor: 'rgb(0, 0, 0)',
+          data: [`${item.price}`],
+        };
+      });
+
+      data = {
+        labels: labels,
+        datasets: datasets.map((dataset) => dataset),
+      };
+    }
+
     return (
-      <div>
+      <div className="mx-5">
         <table className="table table-dark table-bordered border-light mt-5">
           <thead>
             <tr>
               <th scope="col">#</th>
               <th scope="col">Brand</th>
+              <th scope="col">Image</th>
               <th scope="col">Price</th>
               <th scope="col">Size</th>
             </tr>
@@ -26,12 +52,22 @@ class Table extends React.Component {
               <tr key={item.id}>
                 <th scope="row">{item.id}</th>
                 <th>{item.brand}</th>
+                <th>
+                  <img src={item.imageUrl} />
+                </th>
                 <th>{item.price}</th>
                 <th>{item.size}</th>
               </tr>
             ))}
           </tbody>
         </table>
+        {items.length > 0 ? (
+          <div className="mx-5">
+            <Bar data={data} />
+          </div>
+        ) : (
+          <p>no chart</p>
+        )}
       </div>
     );
   }

@@ -1,17 +1,16 @@
 import React from 'react';
-import { ItemAForm, ItemBForm } from '../forms';
-import Table from './Table';
+import { NewItemForm } from '../forms';
+import { Table, BarChart } from './index';
 
 class Pear extends React.Component {
   render() {
     return (
       <div>
         <h1 className="mb-5">Make your comPEARison 🍐</h1>
-        <h2>Enter Details for Item A Below:</h2>
-        <ItemAForm />
-        <h2 className="mt-5">Enter Details for Item B Below:</h2>
-        <ItemBForm />
+        <h2>Enter Details for a New Item Below:</h2>
+        <NewItemForm />
         <Table />
+        {/* <BarChart /> */}
       </div>
     );
   }

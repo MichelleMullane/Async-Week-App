@@ -1,6 +1,7 @@
 import NavBar from './NavBar';
 import Home from './Home';
 import Pear from './Pear';
-import Chart from './Table';
+import Table from './Table';
+import BarChart from './BarChart';
 
-export { Home, Pear, NavBar, Chart };
+export { Home, Pear, NavBar, Table, BarChart };

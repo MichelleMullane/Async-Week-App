@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createItem } from '../../redux';
 
-class ItemAForm extends React.Component {
+class NewItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -66,7 +66,7 @@ class ItemAForm extends React.Component {
         </form>
 
         <button type="submit" onClick={this.handleSubmit}>
-          Submit Item A Details
+          Submit Item Details
         </button>
       </div>
     );
@@ -79,4 +79,4 @@ const mapDispatch = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatch)(ItemAForm);
+export default connect(null, mapDispatch)(NewItemForm);
