@@ -1,4 +1,8 @@
 import React from 'react';
+// Bootstrap JS
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+// Bootstrap CSS
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import store from './store';
