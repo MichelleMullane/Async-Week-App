@@ -16,14 +16,12 @@ class NewItemForm extends React.Component {
   }
 
   handleChange(event) {
-    console.log('handleChange state', this.state);
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
   handleSubmit(event) {
-    console.log('handleSubmit');
     event.preventDefault();
 
     this.props.addItem({
@@ -31,6 +29,7 @@ class NewItemForm extends React.Component {
       price: this.state.price,
       size: this.state.size,
     });
+    console.log('thunk sent from newitemform');
 
     this.setState({
       brand: '',
@@ -43,29 +42,48 @@ class NewItemForm extends React.Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="brand">Brand: </label>
-          <input
-            name="brand"
-            onChange={this.handleChange}
-            value={this.state.brand}
-          />
-
-          <label htmlFor="price">Price: </label>
-          <input
-            name="price"
-            onChange={this.handleChange}
-            value={this.state.price}
-          />
-
-          <label htmlFor="size">Size: </label>
-          <input
-            name="size"
-            onChange={this.handleChange}
-            value={this.state.size}
-          />
+          <div className="row mx-3">
+            <div className="col">
+              <label htmlFor="brand" className="form-label">
+                Brand:
+              </label>
+              <input
+                name="brand"
+                onChange={this.handleChange}
+                value={this.state.brand}
+                className="form-control"
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="price" className="form-label">
+                Price:
+              </label>
+              <input
+                name="price"
+                onChange={this.handleChange}
+                value={this.state.price}
+                className="form-control"
+              />
+            </div>
+            <div className="col">
+              <label htmlFor="size" className="form-label">
+                Size:
+              </label>
+              <input
+                name="size"
+                onChange={this.handleChange}
+                value={this.state.size}
+                className="form-control"
+              />
+            </div>
+          </div>
         </form>
 
-        <button type="submit" onClick={this.handleSubmit}>
+        <button
+          type="submit"
+          onClick={this.handleSubmit}
+          className="btn btn-dark mt-3"
+        >
           Submit Item Details
         </button>
       </div>

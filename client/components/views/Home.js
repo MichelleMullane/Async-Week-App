@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 // Anime js:
 import anime from 'animejs/lib/anime.es.js';
 
@@ -12,7 +12,6 @@ const Home = () => {
       /\S/g,
       "<span class='letter'>$&</span>"
     );
-    console.log(textWrapper);
 
     animation.current = anime
       .timeline({ loop: true })

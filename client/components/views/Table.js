@@ -1,6 +1,6 @@
 import React from 'react';
 import { Bar } from 'react-chartjs-2';
-import { getItems } from '../../redux';
+import { getItems, deleteItem } from '../../redux';
 import { connect } from 'react-redux';
 
 class Table extends React.Component {
@@ -19,12 +19,22 @@ class Table extends React.Component {
 
     if (items.length > 0) {
       const labels = ['Price ($)'];
-      const datasets = items.map((item) => {
-        let color = Math.floor(Math.random() * (255 - 0) + 0);
+      let colors = [];
+      let color = Math.floor(Math.random() * (255 - 0) + 0);
+      for (let i = 0; i < items.length; i++) {
+        colors.push(color);
+        if (color >= 255) {
+          color -= 50;
+        } else {
+          color += 50;
+        }
+      }
+
+      const datasets = items.map((item, index) => {
         return {
           label: `${item.brand}`,
-          backgroundColor: `rgb(${color}, ${color}, ${color})`,
-          borderColor: 'rgb(0, 0, 0)',
+          backgroundColor: `rgb(${colors[index]}, ${colors[index]}, ${colors[index]})`,
+          borderColor: `rgb(${colors[index]}, ${colors[index]}, ${colors[index]})`,
           data: [`${item.price}`],
         };
       });
@@ -50,7 +60,17 @@ class Table extends React.Component {
           <tbody>
             {items.map((item) => (
               <tr key={item.id}>
-                <th scope="row">{item.id}</th>
+                <th scope="row">
+                  {item.id}{' '}
+                  <button
+                    className="btn btn-light"
+                    onClick={() => {
+                      this.props.deleteItem(item);
+                    }}
+                  >
+                    Delete Item
+                  </button>
+                </th>
                 <th>{item.brand}</th>
                 <th>
                   <img src={item.imageUrl} />
@@ -82,6 +102,7 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     getItems: () => dispatch(getItems()),
+    deleteItem: (item) => dispatch(deleteItem(item)),
   };
 };
 
