@@ -62,7 +62,7 @@ class Table extends React.Component {
           </tbody>
         </table>
         {items.length > 0 ? (
-          <div className="mx-5">
+          <div className="mx-5 my-5">
             <Bar data={data} />
           </div>
         ) : (
