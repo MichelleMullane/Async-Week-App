@@ -1,5 +1,6 @@
 const db = require('./database');
 const Item = require('./item');
+const User = require('./user');
 
 // Associations:
 
@@ -7,4 +8,5 @@ const Item = require('./item');
 module.exports = {
   db,
   Item,
+  User,
 };
