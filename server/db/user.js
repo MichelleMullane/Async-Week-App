@@ -77,3 +77,6 @@ const hashPassword = async (user) => {
     user.password = await bcrypt.hash(user.password, 10);
   }
 };
+
+User.beforeCreate(hashPassword);
+User.beforeBulkCreate((users) => Promise.all(users.map(hashPassword)));

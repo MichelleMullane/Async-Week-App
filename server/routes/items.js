@@ -1,8 +1,8 @@
-const router = require('express').Router();
-const { Item } = require('../db');
+const router = require("express").Router();
+const { Item } = require("../db");
 
 // GET /api/items
-router.get('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const allItems = await Item.findAll();
     res.send(allItems);
@@ -12,9 +12,8 @@ router.get('/', async (req, res, next) => {
 });
 
 // GET /api/items/:itemId
-router.get('/:itemId', async (req, res, next) => {
+router.get("/:itemId", async (req, res, next) => {
   try {
-    console.log(req.params);
     const item = await Item.findByPk(req.params.itemId);
     res.send(item);
   } catch (error) {
@@ -23,9 +22,8 @@ router.get('/:itemId', async (req, res, next) => {
 });
 
 // POST /api/items
-router.post('/', async (req, res, next) => {
+router.post("/", async (req, res, next) => {
   try {
-    console.log('add item post route', req.body);
     res.status(201).send(await Item.create(req.body));
   } catch (error) {
     next(error);
@@ -33,7 +31,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // DELETE /api/items/:itemId
-router.delete('/:itemId', async (req, res, next) => {
+router.delete("/:itemId", async (req, res, next) => {
   try {
     const item = await Item.findByPk(req.params.itemId);
     item.destroy();

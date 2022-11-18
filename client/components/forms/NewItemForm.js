@@ -1,14 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { createItem } from '../../redux';
+import React from "react";
+import { connect } from "react-redux";
+import { createItem } from "../../redux";
 
 class NewItemForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      brand: '',
+      brand: "",
       price: 0,
-      size: '',
+      size: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -29,12 +29,11 @@ class NewItemForm extends React.Component {
       price: this.state.price,
       size: this.state.size,
     });
-    console.log('thunk sent from newitemform');
 
     this.setState({
-      brand: '',
+      brand: "",
       price: 0,
-      size: '',
+      size: "",
     });
   }
 
