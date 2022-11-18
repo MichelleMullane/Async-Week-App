@@ -31,12 +31,10 @@ module.exports = User;
 
 User.prototype.correctPassword = function (candidatePwd) {
   //we need to compare the plain version to an encrypted version of the password
-  console.log("password in correctPassword", candidatePwd);
   return bcrypt.compare(candidatePwd, this.password);
 };
 
 User.prototype.generateToken = function () {
-  console.log("inside generate token JWT", process.env.JWT);
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
@@ -44,13 +42,9 @@ User.prototype.generateToken = function () {
  * classMethods
  */
 User.authenticate = async function ({ username, password }) {
-  console.log({ username, password });
   const user = await this.findOne({ where: { username } });
-  console.log("user found:", user);
   if (!user) {
-    console.log("user not found");
     if (!(await user.correctPassword(password))) {
-      console.log("password not found");
       const error = Error("Incorrect username/password");
       error.status = 401;
       throw error;

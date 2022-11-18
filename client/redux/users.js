@@ -29,7 +29,6 @@ export const me = () => async (dispatch) => {
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
-    console.log({ username, password, method });
     try {
       const res = await axios.post(`/api/users/${method}`, {
         username,
