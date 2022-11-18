@@ -1,12 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { authenticate } from '../../redux/users';
+import React from "react";
+import { connect } from "react-redux";
+import { authenticate } from "../../redux/users";
 
 /**
  * COMPONENT
  */
 const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
+  console.log("auth form props", props);
 
   return (
     <div>
@@ -40,18 +41,17 @@ const AuthForm = (props) => {
  *   can stay DRY with interfaces that are very similar to each other!
  */
 const mapLogin = (state) => {
-  console.log(state);
   return {
-    name: 'login',
-    displayName: 'Login',
+    name: "login",
+    displayName: "Login",
     error: state.auth.error,
   };
 };
 
 const mapSignup = (state) => {
   return {
-    name: 'signup',
-    displayName: 'Sign Up',
+    name: "signup",
+    displayName: "Sign Up",
     error: state.auth.error,
   };
 };

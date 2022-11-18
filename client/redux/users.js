@@ -1,9 +1,11 @@
-const TOKEN = 'token';
+import axios from "axios";
+
+const TOKEN = "token";
 
 /**
  * ACTION TYPES
  */
-const SET_AUTH = 'SET_AUTH';
+const SET_AUTH = "SET_AUTH";
 
 /**
  * ACTION CREATORS
@@ -16,7 +18,7 @@ const setAuth = (auth) => ({ type: SET_AUTH, auth });
 export const me = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
   if (token) {
-    const res = await axios.get('/auth/me', {
+    const res = await axios.get("/api/users/me", {
       headers: {
         authorization: token,
       },
@@ -27,9 +29,12 @@ export const me = () => async (dispatch) => {
 
 export const authenticate =
   (username, password, method) => async (dispatch) => {
-    console.log('method', method);
+    console.log({ username, password, method });
     try {
-      const res = await axios.post(`/auth/${method}`, { username, password });
+      const res = await axios.post(`/api/users/${method}`, {
+        username,
+        password,
+      });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
     } catch (authError) {
@@ -39,7 +44,7 @@ export const authenticate =
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN);
-  history.push('/login');
+  history.push("/api/users/login");
   return {
     type: SET_AUTH,
     auth: {},

@@ -9,8 +9,8 @@
   "scripts": {
     "build": "webpack",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server",
-    "start-dev": "webpack -w & nodemon server",
+    "start": "nodemon server",
+    "start-dev": "JWT=secret webpack -w & nodemon server",
     "seed": "node seed.js"
   },
   "author": "",
@@ -22,6 +22,8 @@
     "body-parser": "^1.20.1",
     "bootstrap": "^5.2.2",
     "chart.js": "^3.9.1",
+    "cheerio": "^1.0.0-rc.12",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
