@@ -35,6 +35,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.prototype.generateToken = function () {
+  console.log(process.env.JWT);
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
@@ -57,8 +58,9 @@ User.findByToken = async function (token) {
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
+    console.log("token", token);
     if (!user) {
-      throw "nooo";
+      throw "not a user";
     }
     return user;
   } catch (ex) {

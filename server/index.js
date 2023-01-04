@@ -2,10 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const path = require("path");
 const bodyParser = require("body-parser");
-require("dotenv").config();
+// require("dotenv").config();
 const port = process.env.PORT || 3000;
 
 const app = express();
+
+// if I am not in my production environment, I want access to the secrets.js file inside of my local machine (each dev should have one) --> development test
+if (process.env.NODE_ENV !== "production") require("../secrets");
+console.log("env variables", process.env.NODE_ENV);
 
 // Middleware
 app.use(morgan("dev"));

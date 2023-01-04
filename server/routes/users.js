@@ -1,11 +1,9 @@
 const router = require("express").Router();
-// const express = require("express");
 const { User } = require("../db");
-
-// router.use(express.json());
+const { requireToken, isAdmin } = require("./gatekeepingMiddleware");
 
 // api/users
-router.get("/", async (req, res, next) => {
+router.get("/", requireToken, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       attributes: ["id", "username"], // information we want back & hide the rest from the client(browser)
@@ -28,7 +26,8 @@ router.get("/me", async (req, res, next) => {
 // api/users/signup
 router.post("/signup", async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const { username, password } = req.body;
+    const user = await User.create({ username, password });
     res.send({ token: await user.generateToken() });
   } catch (err) {
     if (err.name === "SequelizeUniqueConstraintError") {

@@ -1,22 +1,53 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { Home, Pear, NavBar } from "./views";
+import { connect } from "react-redux";
+import { Switch, Route, withRouter, Redirect } from "react-router-dom";
+import { Home, Pear, MemberDashboard } from "./views";
 import { Login, Signup } from "./forms";
+import { me } from "../redux/users";
 
-const Paths = () => {
-  return (
-    <Router>
+class Paths extends React.Component {
+  componentDidMount() {
+    this.props.loadInitialData();
+  }
+
+  render() {
+    const { isLoggedIn } = this.props;
+
+    return (
       <div>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/pear" element={<Pear />} />
-        </Routes>
+        {isLoggedIn ? (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/pear" component={Pear} />
+            <Redirect to="/dashboard" component={MemberDashboard} />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/signup" component={Signup} />
+            <Route path="/pear" component={Pear} />
+          </Switch>
+        )}
       </div>
-    </Router>
-  );
+    );
+  }
+}
+
+const mapState = (state) => {
+  return {
+    isLoggedIn: !!state.auth.id,
+  };
 };
 
-export default Paths;
+const mapDispatch = (dispatch) => {
+  return {
+    loadInitialData() {
+      dispatch(me());
+    },
+  };
+};
+
+export default withRouter(connect(mapState, mapDispatch)(Paths));
